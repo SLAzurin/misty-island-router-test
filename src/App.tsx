@@ -232,254 +232,357 @@ function App() {
   }, [build]);
 
   return (
-    <div style={{ marginBottom: "20vh" }}>
-      <h1>Big warning:</h1>
-      <h3>
-        <br />
-        If the app is in a spazzing state, refresh this webpage.
-        <br />
-        <br />
-        Please understand this website was made like a castle built overnight
-        without a solid foundation.
-        <br />
-        <br />
-        <span style={{ color: "red" }}>NEW! </span>
-        I recently added Mikeychain's Challenge Mode Lazy build 2.0 as a build
-        template.
-        <br />
-        Scroll all the way down and click on "Import Mikeychain's Lazy 2.0 Route
-        for Challenge Mode".
-        <br />
-        Video tutorial here:{" "}
-        <a
-          href="https://www.youtube.com/watch?v=MVMTjHSZIZY"
-          target={"_blank"}
-          rel={"noreferrer"}
-        >
-          https://www.youtube.com/watch?v=MVMTjHSZIZY
-        </a>
-        <br />
-        <br />
-        If there are other issues, please leave a comment on my original reddit
-        post{" "}
-        <a
-          target="_blank"
-          rel="noreferrer"
-          href="https://www.reddit.com/r/Maplestory/comments/zuvpy0/tool_misty_island_route_planner/"
-        >
-          here
-        </a>
-        .
-        <br />
-        <br />
-        Sorry for the inconvenience, and thanks for using this tool.
-      </h3>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div>
+    <>
+      <div style={{ position: "absolute", height: "calc(var(--vh, 1vh) * 10)", width: "calc(var(--vh, 1vw) * 96)", padding: "0px" }}>
+        
+      </div>
+      <div
+        style={{
+          height: "calc(var(--vh, 1vh) * 98)",
+          overflow: "scroll",
+        }}
+      >
+        <h1 style={{ marginTop: "calc(var(--vh, 1vh) * 10)" }}>Big warning:</h1>
+        <h3>
+          <br />
+          If the app is in a spazzing state, refresh this webpage.
+          <br />
+          <br />
+          Please understand this website was made like a castle built overnight
+          without a solid foundation.
+          <br />
+          <br />
+          <span style={{ color: "red" }}>NEW! </span>
+          I recently added Mikeychain's Challenge Mode Lazy build 2.0 as a build
+          template.
+          <br />
+          Scroll all the way down and click on "Import Mikeychain's Lazy 2.0
+          Route for Challenge Mode".
+          <br />
+          Video tutorial here:{" "}
+          <a
+            href="https://www.youtube.com/watch?v=MVMTjHSZIZY"
+            target={"_blank"}
+            rel={"noreferrer"}
+          >
+            https://www.youtube.com/watch?v=MVMTjHSZIZY
+          </a>
+          <br />
+          <br />
+          If there are other issues, please leave a comment on my original
+          reddit post{" "}
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://www.reddit.com/r/Maplestory/comments/zuvpy0/tool_misty_island_route_planner/"
+          >
+            here
+          </a>
+          .
+          <br />
+          <br />
+          Sorry for the inconvenience, and thanks for using this tool.
+        </h3>
+        <div style={{ display: "flex", flexDirection: "column" }}>
           <div>
-            <div style={{ display: "flex" }}>
-              <span>
-                <h2>Options:</h2>
-                <h4>
-                  Tip: If you're on mobile, use `Lock build` and make your icons
-                  larger!
-                </h4>
-                <h2>
-                  Lock build:{" "}
+            <div>
+              <div style={{ display: "flex" }}>
+                <span>
+                  <h2>Options:</h2>
+                  <h4>
+                    Tip: If you're on mobile, use `Lock build` and make your
+                    icons larger!
+                  </h4>
+                  <h2>
+                    Lock build:{" "}
+                    <button
+                      style={{ ...centerStyle, marginLeft: "1vw" }}
+                      type="button"
+                      onClick={() => {
+                        setLockedBuild(!lockedBuild);
+                      }}
+                    >
+                      {lockedBuild ? "Unlock build" : "Lock Build"}
+                    </button>
+                  </h2>
+                  <p>
+                    This hides all add/remove buttons.
+                    <br />
+                    When the build is locked, click on the image to mark item as
+                    disabled.
+                  </p>
+                  <span>
+                    <h2>
+                      Image size:
+                      <input
+                        type={"number"}
+                        min={1}
+                        max={10}
+                        value={assetSize}
+                        onChange={(e) => {
+                          setAssetSize(Number(e.target.value));
+                        }}
+                        style={{ marginLeft: "1vw" }}
+                      ></input>
+                    </h2>
+                  </span>
+                  <h2>
+                    Minimalist mode:{" "}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMinimalistMode(!minimalistMode);
+                      }}
+                    >
+                      {minimalistMode ? "Disable" : "Enable"}
+                    </button>
+                  </h2>
+                  <p>
+                    This hides item names from raw materials, and composite
+                    materials, and makes the number bigger in size.
+                  </p>
+                </span>
+              </div>
+
+              {!lockedBuild && (
+                <div style={{ display: "flex" }}>
+                  <h2>Total resources usage (not counting disabled ones):</h2>
                   <button
                     style={{ ...centerStyle, marginLeft: "1vw" }}
                     type="button"
                     onClick={() => {
-                      setLockedBuild(!lockedBuild);
+                      setShowTotalRawMaterials(!showTotalRawMaterials);
                     }}
                   >
-                    {lockedBuild ? "Unlock build" : "Lock Build"}
+                    {showTotalRawMaterials ? "Hide" : "Click here to show"}
                   </button>
-                </h2>
-                <p>
-                  This hides all add/remove buttons.
-                  <br />
-                  When the build is locked, click on the image to mark item as
-                  disabled.
-                </p>
-                <span>
-                  <h2>
-                    Image size:
-                    <input
-                      type={"number"}
-                      min={1}
-                      max={10}
-                      value={assetSize}
-                      onChange={(e) => {
-                        setAssetSize(Number(e.target.value));
-                      }}
-                      style={{ marginLeft: "1vw" }}
-                    ></input>
-                  </h2>
-                </span>
-                <h2>
-                  Minimalist mode:{" "}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMinimalistMode(!minimalistMode);
-                    }}
-                  >
-                    {minimalistMode ? "Disable" : "Enable"}
-                  </button>
-                </h2>
-                <p>
-                  This hides item names from raw materials, and composite
-                  materials, and makes the number bigger in size.
-                </p>
-              </span>
-            </div>
-
-            {!lockedBuild && (
-              <div style={{ display: "flex" }}>
-                <h2>Total resources usage (not counting disabled ones):</h2>
-                <button
-                  style={{ ...centerStyle, marginLeft: "1vw" }}
-                  type="button"
-                  onClick={() => {
-                    setShowTotalRawMaterials(!showTotalRawMaterials);
-                  }}
-                >
-                  {showTotalRawMaterials ? "Hide" : "Click here to show"}
-                </button>
-              </div>
-            )}
-            {showTotalRawMaterials &&
-              Object.entries(getTotalMaterials(build)).map(
-                ([rawMaterial, count], i) => {
-                  if (count > 0)
-                    return (
-                      <div
-                        key={`build_total_material_${i}`}
-                        style={{ display: "flex" }}
-                      >
-                        <img
-                          alt={rawMaterial}
-                          src={getAsset(rawMaterial)}
-                          style={assetStyle(assetSize)}
-                        ></img>
-                        <p style={{ marginLeft: "1vw" }}>
-                          {count} {rawMaterial}
-                        </p>
-                      </div>
-                    );
-                  return null;
-                }
+                </div>
               )}
-          </div>
-          <h1>Build:</h1>
-          {build.map((back, backNumber) => {
-            return (
-              <div key={backNumber}>
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                  <div>
-                    <h2>
-                      Back #{backNumber + 1}{" "}
-                      {!lockedBuild && (
-                        <button
-                          type="button"
-                          onClick={() => {
-                            deleteBack(backNumber);
-                          }}
-                        >
-                          Delete
-                        </button>
-                      )}
-                    </h2>
-                    {back.craftables.map((structure, structureIndex) => {
+              {showTotalRawMaterials &&
+                Object.entries(getTotalMaterials(build)).map(
+                  ([rawMaterial, count], i) => {
+                    if (count > 0)
                       return (
-                        <div key={structureIndex} style={{ display: "flex" }}>
-                          {!lockedBuild && (
-                            <>
-                              <button
-                                type="button"
-                                style={{ width: "3vw" }}
-                                disabled={structureIndex === 0}
-                                onClick={() => {
-                                  moveUp(backNumber, structureIndex);
-                                }}
-                              >
-                                ↑
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  deleteCraftable(backNumber, structureIndex);
-                                }}
-                                style={centerStyle}
-                              >
-                                Delete
-                              </button>
-
-                              <button
-                                disabled={
-                                  structureIndex === back.craftables.length - 1
-                                }
-                                type="button"
-                                style={{ width: "3vw" }}
-                                onClick={() => {
-                                  moveDown(backNumber, structureIndex);
-                                }}
-                              >
-                                ↓
-                              </button>
-                            </>
-                          )}
-
+                        <div
+                          key={`build_total_material_${i}`}
+                          style={{ display: "flex" }}
+                        >
                           <img
-                            onClick={() => {
-                              if (lockedBuild) {
-                                let newBuild = [...build];
-                                newBuild[backNumber].disabledCraftables![
-                                  structureIndex
-                                ] =
-                                  !newBuild[backNumber].disabledCraftables![
-                                    structureIndex
-                                  ];
-                                setBuild(newBuild);
-                              }
-                            }}
-                            alt={structure}
+                            alt={rawMaterial}
+                            src={getAsset(rawMaterial)}
                             style={assetStyle(assetSize)}
-                            src={getAsset(structure)}
-                          />
-                          {!lockedBuild ? (
-                            <select
-                              style={centerStyle}
-                              title={
-                                "edit-craftable-" +
-                                backNumber +
-                                "-" +
-                                structureIndex
-                              }
-                              name={
-                                "edit-craftable-" +
-                                backNumber +
-                                "-" +
-                                structureIndex
-                              }
-                              value={structure}
-                              onChange={(e) => {
-                                if (!lockedBuild)
-                                  editCraftable(
-                                    backNumber,
-                                    structureIndex,
-                                    e.target.value
-                                  );
+                          ></img>
+                          <p style={{ marginLeft: "1vw" }}>
+                            {count} {rawMaterial}
+                          </p>
+                        </div>
+                      );
+                    return null;
+                  }
+                )}
+            </div>
+            <h1>Build:</h1>
+            {build.map((back, backNumber) => {
+              return (
+                <div key={backNumber}>
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div>
+                      <h2>
+                        Back #{backNumber + 1}{" "}
+                        {!lockedBuild && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              deleteBack(backNumber);
+                            }}
+                          >
+                            Delete
+                          </button>
+                        )}
+                      </h2>
+                      {back.craftables.map((structure, structureIndex) => {
+                        return (
+                          <div key={structureIndex} style={{ display: "flex" }}>
+                            {!lockedBuild && (
+                              <>
+                                <button
+                                  type="button"
+                                  style={{ width: "3vw" }}
+                                  disabled={structureIndex === 0}
+                                  onClick={() => {
+                                    moveUp(backNumber, structureIndex);
+                                  }}
+                                >
+                                  ↑
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    deleteCraftable(backNumber, structureIndex);
+                                  }}
+                                  style={centerStyle}
+                                >
+                                  Delete
+                                </button>
+
+                                <button
+                                  disabled={
+                                    structureIndex ===
+                                    back.craftables.length - 1
+                                  }
+                                  type="button"
+                                  style={{ width: "3vw" }}
+                                  onClick={() => {
+                                    moveDown(backNumber, structureIndex);
+                                  }}
+                                >
+                                  ↓
+                                </button>
+                              </>
+                            )}
+
+                            <img
+                              onClick={() => {
+                                if (lockedBuild) {
+                                  let newBuild = [...build];
+                                  newBuild[backNumber].disabledCraftables![
+                                    structureIndex
+                                  ] =
+                                    !newBuild[backNumber].disabledCraftables![
+                                      structureIndex
+                                    ];
+                                  setBuild(newBuild);
+                                }
                               }}
+                              alt={structure}
+                              style={assetStyle(assetSize)}
+                              src={getAsset(structure)}
+                            />
+                            {!lockedBuild ? (
+                              <select
+                                style={centerStyle}
+                                title={
+                                  "edit-craftable-" +
+                                  backNumber +
+                                  "-" +
+                                  structureIndex
+                                }
+                                name={
+                                  "edit-craftable-" +
+                                  backNumber +
+                                  "-" +
+                                  structureIndex
+                                }
+                                value={structure}
+                                onChange={(e) => {
+                                  if (!lockedBuild)
+                                    editCraftable(
+                                      backNumber,
+                                      structureIndex,
+                                      e.target.value
+                                    );
+                                }}
+                              >
+                                {Object.keys(items)
+                                  .sort()
+                                  .map((itemName, itemIndex) => {
+                                    // fake indices
+                                    return (
+                                      <option
+                                        key={`${backNumber}_${structureIndex}_${itemIndex}`}
+                                        value={itemName}
+                                      >
+                                        {itemName}
+                                      </option>
+                                    );
+                                  })}
+                              </select>
+                            ) : !back.disabledCraftables![structureIndex] ? (
+                              <div style={{ ...centerStyle, width: "100px" }}>
+                                {structure}
+                              </div>
+                            ) : (
+                              <s
+                                style={{
+                                  ...centerStyle,
+                                  width: "100px",
+                                  color: "red",
+                                }}
+                              >
+                                {structure}
+                              </s>
+                            )}
+                            {typeof back.disabledCraftables !== "undefined" &&
+                              structureIndex < back.disabledCraftables.length &&
+                              !lockedBuild && (
+                                <div style={{ display: "flex" }}>
+                                  <input
+                                    id={
+                                      "disable-craftable-" +
+                                      backNumber +
+                                      "-" +
+                                      structureIndex
+                                    }
+                                    style={centerStyle}
+                                    onChange={() => {
+                                      let newBuild = [...build];
+                                      newBuild[backNumber].disabledCraftables![
+                                        structureIndex
+                                      ] =
+                                        !newBuild[backNumber]
+                                          .disabledCraftables![structureIndex];
+                                      setBuild(newBuild);
+                                    }}
+                                    type={"checkbox"}
+                                    checked={
+                                      back.disabledCraftables[structureIndex]
+                                    }
+                                  ></input>
+                                  <label
+                                    htmlFor={
+                                      "disable-craftable-" +
+                                      backNumber +
+                                      "-" +
+                                      structureIndex
+                                    }
+                                    style={centerStyle}
+                                  >
+                                    Disable
+                                  </label>
+                                  <button
+                                    style={centerStyle}
+                                    type="button"
+                                    onClick={() => {
+                                      addCraftable(backNumber, structure);
+                                    }}
+                                  >
+                                    Duplicate
+                                  </button>
+                                </div>
+                              )}
+                          </div>
+                        );
+                      })}
+                      {!lockedBuild && (
+                        <>
+                          <label>Add craftable:</label>
+                          {!searchMode[backNumber] && (
+                            <select
+                              name={"add-craftable-" + backNumber}
+                              title={"add-craftable-" + backNumber}
+                              onChange={(e) => {
+                                if (e.target.value !== "")
+                                  addCraftable(backNumber, e.target.value);
+                              }}
+                              value={""}
                             >
+                              <option value={""}></option>
                               {Object.keys(items)
                                 .sort()
                                 .map((itemName, itemIndex) => {
-                                  // fake indices
                                   return (
                                     <option
-                                      key={`${backNumber}_${structureIndex}_${itemIndex}`}
+                                      key={`addcraftable${backNumber}_${itemIndex}`}
                                       value={itemName}
                                     >
                                       {itemName}
@@ -487,420 +590,335 @@ function App() {
                                   );
                                 })}
                             </select>
-                          ) : !back.disabledCraftables![structureIndex] ? (
-                            <div style={{ ...centerStyle, width: "100px" }}>
-                              {structure}
-                            </div>
-                          ) : (
-                            <s
-                              style={{
-                                ...centerStyle,
-                                width: "100px",
-                                color: "red",
-                              }}
-                            >
-                              {structure}
-                            </s>
                           )}
-                          {typeof back.disabledCraftables !== "undefined" &&
-                            structureIndex < back.disabledCraftables.length &&
-                            !lockedBuild && (
-                              <div style={{ display: "flex" }}>
-                                <input
-                                  id={
-                                    "disable-craftable-" +
-                                    backNumber +
-                                    "-" +
-                                    structureIndex
-                                  }
-                                  style={centerStyle}
-                                  onChange={() => {
-                                    let newBuild = [...build];
-                                    newBuild[backNumber].disabledCraftables![
-                                      structureIndex
-                                    ] =
-                                      !newBuild[backNumber].disabledCraftables![
-                                        structureIndex
-                                      ];
-                                    setBuild(newBuild);
-                                  }}
-                                  type={"checkbox"}
-                                  checked={
-                                    back.disabledCraftables[structureIndex]
-                                  }
-                                ></input>
-                                <label
-                                  htmlFor={
-                                    "disable-craftable-" +
-                                    backNumber +
-                                    "-" +
-                                    structureIndex
-                                  }
-                                  style={centerStyle}
-                                >
-                                  Disable
-                                </label>
-                                <button
-                                  style={centerStyle}
-                                  type="button"
-                                  onClick={() => {
-                                    addCraftable(backNumber, structure);
-                                  }}
-                                >
-                                  Duplicate
-                                </button>
-                              </div>
-                            )}
-                        </div>
-                      );
-                    })}
-                    {!lockedBuild && (
-                      <>
-                        <label>Add craftable:</label>
-                        {!searchMode[backNumber] && (
-                          <select
-                            name={"add-craftable-" + backNumber}
-                            title={"add-craftable-" + backNumber}
-                            onChange={(e) => {
-                              if (e.target.value !== "")
-                                addCraftable(backNumber, e.target.value);
-                            }}
-                            value={""}
-                          >
-                            <option value={""}></option>
-                            {Object.keys(items)
-                              .sort()
-                              .map((itemName, itemIndex) => {
-                                return (
-                                  <option
-                                    key={`addcraftable${backNumber}_${itemIndex}`}
-                                    value={itemName}
-                                  >
-                                    {itemName}
-                                  </option>
-                                );
-                              })}
-                          </select>
-                        )}
-                        {searchMode[backNumber] && (
-                          <div>
-                            <input
-                              placeholder="Search item name here..."
-                              value={searchTerms[backNumber]}
-                              onChange={(e) => {
-                                let newSearchTerm = [...searchTerms];
-                                newSearchTerm[backNumber] = e.target.value;
-                                setSearchTerms(newSearchTerm);
-                              }}
-                            ></input>
+                          {searchMode[backNumber] && (
                             <div>
-                              {searchTerms[backNumber].length !== 0 &&
-                                Object.keys(items).map((itemName) => {
-                                  if (
-                                    itemName
-                                      .toLowerCase()
-                                      .includes(
-                                        searchTerms[backNumber].toLowerCase()
-                                      )
-                                  ) {
-                                    return (
-                                      <button
-                                        onClick={() => {
-                                          addCraftable(backNumber, itemName);
-                                        }}
-                                      >
-                                        {itemName}
-                                      </button>
-                                    );
-                                  }
-                                  return null;
-                                })}
+                              <input
+                                placeholder="Search item name here..."
+                                value={searchTerms[backNumber]}
+                                onChange={(e) => {
+                                  let newSearchTerm = [...searchTerms];
+                                  newSearchTerm[backNumber] = e.target.value;
+                                  setSearchTerms(newSearchTerm);
+                                }}
+                              ></input>
+                              <div>
+                                {searchTerms[backNumber].length !== 0 &&
+                                  Object.keys(items).map((itemName) => {
+                                    if (
+                                      itemName
+                                        .toLowerCase()
+                                        .includes(
+                                          searchTerms[backNumber].toLowerCase()
+                                        )
+                                    ) {
+                                      return (
+                                        <button
+                                          onClick={() => {
+                                            addCraftable(backNumber, itemName);
+                                          }}
+                                        >
+                                          {itemName}
+                                        </button>
+                                      );
+                                    }
+                                    return null;
+                                  })}
+                              </div>
                             </div>
+                          )}
+                          <input
+                            id={`searchmode-${backNumber}`}
+                            type={"checkbox"}
+                            onChange={() => {
+                              let newSearchMode = [...searchMode];
+                              newSearchMode[backNumber] =
+                                !newSearchMode[backNumber];
+                              setSearchMode(newSearchMode);
+                            }}
+                            checked={searchMode[backNumber]}
+                          ></input>
+                          <label htmlFor={`searchmode-${backNumber}`}>
+                            {searchMode[backNumber]
+                              ? "Uncheck for dropdown mode"
+                              : "Check for text search mode"}
+                          </label>
+                        </>
+                      )}
+                      <div>
+                        {typeof back.note !== "undefined" && (
+                          <div>
+                            <textarea
+                              rows={4}
+                              style={{ width: "100%" }}
+                              onChange={(e) => {
+                                if (!lockedBuild) {
+                                  let newBuild = [...build];
+                                  newBuild[backNumber].note = e.target.value;
+                                  setBuild(newBuild);
+                                }
+                              }}
+                              value={back.note}
+                            />
                           </div>
                         )}
-                        <input
-                          id={`searchmode-${backNumber}`}
-                          type={"checkbox"}
-                          onChange={() => {
-                            let newSearchMode = [...searchMode];
-                            newSearchMode[backNumber] =
-                              !newSearchMode[backNumber];
-                            setSearchMode(newSearchMode);
-                          }}
-                          checked={searchMode[backNumber]}
-                        ></input>
-                        <label htmlFor={`searchmode-${backNumber}`}>
-                          {searchMode[backNumber]
-                            ? "Uncheck for dropdown mode"
-                            : "Check for text search mode"}
-                        </label>
-                      </>
-                    )}
-                    <div>
-                      {typeof back.note !== "undefined" && (
-                        <div>
-                          <textarea
-                            rows={4}
-                            style={{ width: "100%" }}
-                            onChange={(e) => {
-                              if (!lockedBuild) {
-                                let newBuild = [...build];
-                                newBuild[backNumber].note = e.target.value;
-                                setBuild(newBuild);
+                        {!lockedBuild && (
+                          <button
+                            onClick={() => {
+                              let newBuild = [...build];
+                              if (typeof back.note === "undefined") {
+                                newBuild[backNumber].note = "";
+                              } else {
+                                delete newBuild[backNumber].note;
                               }
-                            }}
-                            value={back.note}
-                          />
-                        </div>
-                      )}
-                      {!lockedBuild && (
-                        <button
-                          onClick={() => {
-                            let newBuild = [...build];
-                            if (typeof back.note === "undefined") {
-                              newBuild[backNumber].note = "";
-                            } else {
-                              delete newBuild[backNumber].note;
-                            }
-                            setBuild(newBuild);
-                          }}
-                        >
-                          {typeof back.note !== "undefined"
-                            ? "Delete Note"
-                            : "Add Note"}
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <div style={{ marginLeft: "2rem" }}>
-                    <h2>Back #{backNumber + 1} raw material:</h2>
-                    {Object.entries(
-                      getRawMaterials(back.craftables, back.disabledCraftables!)
-                    ).map(([rawMaterial, count], rawMaterialIndex) => {
-                      if (count > 0) {
-                        return (
-                          <div
-                            key={`${backNumber}_raw_${rawMaterialIndex}`}
-                            style={{
-                              display: "flex",
-                              marginTop: "0.2vh",
-                              marginBottom: "0.2vh",
+                              setBuild(newBuild);
                             }}
                           >
-                            <img
-                              alt={rawMaterial}
-                              style={assetStyle(assetSize)}
-                              src={getAsset(rawMaterial)}
-                            ></img>
-                            {!minimalistMode ? (
-                              <span
-                                style={{ ...centerStyle, marginLeft: "1vw" }}
-                              >
-                                {count} {rawMaterial}
-                              </span>
-                            ) : (
-                              <span
-                                style={{
-                                  ...centerStyle,
-                                  marginLeft: "1vw",
-                                  fontSize: "2rem",
-                                }}
-                              >
-                                {count}
-                              </span>
-                            )}
-                          </div>
-                        );
-                      } else {
-                        return null;
-                      }
-                    })}
-                  </div>
-                  <div style={{ marginLeft: "2rem" }}>
-                    <h2>
-                      {showComposites[backNumber] &&
-                        `Back #${backNumber + 1} composites: `}
-                      <button
-                        onClick={() => {
-                          let newShowComposites = [...showComposites];
-                          newShowComposites[backNumber] =
-                            !showComposites[backNumber];
-                          setShowComposites(newShowComposites);
-                        }}
-                      >
-                        {showComposites[backNumber] ? "Hide" : "Show"}
-                      </button>
-                    </h2>
-                    {showComposites[backNumber] &&
-                      Object.entries(
-                        getCompositeMaterials(
+                            {typeof back.note !== "undefined"
+                              ? "Delete Note"
+                              : "Add Note"}
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <div style={{ marginLeft: "2rem" }}>
+                      <h2>Back #{backNumber + 1} raw material:</h2>
+                      {Object.entries(
+                        getRawMaterials(
                           back.craftables,
                           back.disabledCraftables!
                         )
-                      ).map(([compositeType, composites]) => {
-                        if (Object.keys(composites).length !== 0)
+                      ).map(([rawMaterial, count], rawMaterialIndex) => {
+                        if (count > 0) {
                           return (
-                            <div>
-                              <h4>{compositeType}</h4>
-                              {Object.entries(composites).map(
-                                ([rawMaterial, count], rawMaterialIndex) => {
-                                  return (
-                                    <div
-                                      key={`${backNumber}_raw_${rawMaterialIndex}`}
-                                      style={{
-                                        display: "flex",
-                                        marginTop: "0.2vh",
-                                        marginBottom: "0.2vh",
-                                      }}
-                                    >
-                                      <img
-                                        alt={rawMaterial}
-                                        style={assetStyle(assetSize)}
-                                        src={getAsset(rawMaterial)}
-                                      />
-                                      {!minimalistMode ? (
-                                        <span
-                                          style={{
-                                            ...centerStyle,
-                                            marginLeft: "1vw",
-                                          }}
-                                        >
-                                          {count} {rawMaterial}
-                                        </span>
-                                      ) : (
-                                        <span
-                                          style={{
-                                            ...centerStyle,
-                                            marginLeft: "1vw",
-                                            fontSize: "2rem",
-                                          }}
-                                        >
-                                          {count}
-                                        </span>
-                                      )}
-                                    </div>
-                                  );
-                                }
+                            <div
+                              key={`${backNumber}_raw_${rawMaterialIndex}`}
+                              style={{
+                                display: "flex",
+                                marginTop: "0.2vh",
+                                marginBottom: "0.2vh",
+                              }}
+                            >
+                              <img
+                                alt={rawMaterial}
+                                style={assetStyle(assetSize)}
+                                src={getAsset(rawMaterial)}
+                              ></img>
+                              {!minimalistMode ? (
+                                <span
+                                  style={{ ...centerStyle, marginLeft: "1vw" }}
+                                >
+                                  {count} {rawMaterial}
+                                </span>
+                              ) : (
+                                <span
+                                  style={{
+                                    ...centerStyle,
+                                    marginLeft: "1vw",
+                                    fontSize: "2rem",
+                                  }}
+                                >
+                                  {count}
+                                </span>
                               )}
                             </div>
                           );
-                        return null;
+                        } else {
+                          return null;
+                        }
                       })}
+                    </div>
+                    <div style={{ marginLeft: "2rem" }}>
+                      <h2>
+                        {showComposites[backNumber] &&
+                          `Back #${backNumber + 1} composites: `}
+                        <button
+                          onClick={() => {
+                            let newShowComposites = [...showComposites];
+                            newShowComposites[backNumber] =
+                              !showComposites[backNumber];
+                            setShowComposites(newShowComposites);
+                          }}
+                        >
+                          {showComposites[backNumber] ? "Hide" : "Show"}
+                        </button>
+                      </h2>
+                      {showComposites[backNumber] &&
+                        Object.entries(
+                          getCompositeMaterials(
+                            back.craftables,
+                            back.disabledCraftables!
+                          )
+                        ).map(([compositeType, composites]) => {
+                          if (Object.keys(composites).length !== 0)
+                            return (
+                              <div>
+                                <h4>{compositeType}</h4>
+                                {Object.entries(composites).map(
+                                  ([rawMaterial, count], rawMaterialIndex) => {
+                                    return (
+                                      <div
+                                        key={`${backNumber}_raw_${rawMaterialIndex}`}
+                                        style={{
+                                          display: "flex",
+                                          marginTop: "0.2vh",
+                                          marginBottom: "0.2vh",
+                                        }}
+                                      >
+                                        <img
+                                          alt={rawMaterial}
+                                          style={assetStyle(assetSize)}
+                                          src={getAsset(rawMaterial)}
+                                        />
+                                        {!minimalistMode ? (
+                                          <span
+                                            style={{
+                                              ...centerStyle,
+                                              marginLeft: "1vw",
+                                            }}
+                                          >
+                                            {count} {rawMaterial}
+                                          </span>
+                                        ) : (
+                                          <span
+                                            style={{
+                                              ...centerStyle,
+                                              marginLeft: "1vw",
+                                              fontSize: "2rem",
+                                            }}
+                                          >
+                                            {count}
+                                          </span>
+                                        )}
+                                      </div>
+                                    );
+                                  }
+                                )}
+                              </div>
+                            );
+                          return null;
+                        })}
+                    </div>
                   </div>
+                  {!lockedBuild && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        addBack(backNumber);
+                      }}
+                    >
+                      Add back HERE
+                    </button>
+                  )}
                 </div>
-                {!lockedBuild && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      addBack(backNumber);
-                    }}
-                  >
-                    Add back HERE
-                  </button>
-                )}
-              </div>
-            );
-          })}
-        </div>
-        {!lockedBuild && (
-          <button
-            onClick={() => {
-              addBack();
-            }}
-          >
-            Add back
-          </button>
-        )}
-        <div style={{ marginTop: "4vh" }}>
-          Made by Azuri (aka{" "}
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href="https://twitch.tv/AzuriAdore"
-          >
-            AzuriAdore
-          </a>{" "}
-          on Twitch,{" "}
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href="https://github.com/SLAzurin"
-          >
-            SLAzurin
-          </a>{" "}
-          on GitHub,{" "}
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href="https://www.reddit.com/user/Omnoloko/"
-          >
-            u/Omnoloko
-          </a>{" "}
-          on Reddit)
-        </div>
-        <div style={{ marginTop: "4vh" }}>
-          Special thanks to{" "}
-          <a target="_blank" rel="noreferrer" href="https://github.com/ulucs">
-            ulucs
-          </a>{" "}
-          for adding the sub-composites{" "}
-          <a target="_blank" rel="noreferrer" href="https://github.com/SLAzurin/misty-island-router/pull/2">
-            feature
-          </a>
-          !
-        </div>
-        <div style={{ marginTop: "2vh" }}>
-          <h3>Import/Export your route:</h3>
-          <p>{buildExportStrError}</p>
+              );
+            })}
+          </div>
+          {!lockedBuild && (
+            <button
+              onClick={() => {
+                addBack();
+              }}
+            >
+              Add back
+            </button>
+          )}
+          <div style={{ marginTop: "4vh" }}>
+            Made by Azuri (aka{" "}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://twitch.tv/AzuriAdore"
+            >
+              AzuriAdore
+            </a>{" "}
+            on Twitch,{" "}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://github.com/SLAzurin"
+            >
+              SLAzurin
+            </a>{" "}
+            on GitHub,{" "}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.reddit.com/user/Omnoloko/"
+            >
+              u/Omnoloko
+            </a>{" "}
+            on Reddit)
+          </div>
+          <div style={{ marginTop: "4vh" }}>
+            Special thanks to{" "}
+            <a target="_blank" rel="noreferrer" href="https://github.com/ulucs">
+              ulucs
+            </a>{" "}
+            for adding the sub-composites{" "}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://github.com/SLAzurin/misty-island-router/pull/2"
+            >
+              feature
+            </a>
+            !
+          </div>
+          <div style={{ marginTop: "2vh" }}>
+            <h3>Import/Export your route:</h3>
+            <p>{buildExportStrError}</p>
 
-          {showImportRouteTextarea && (
-            <textarea
-              id="build-export-text-area"
-              style={{ width: "100%" }}
-              rows={10}
-              onChange={(e) => {
-                setBuildExportStr(e.target.value);
-              }}
-              placeholder="Copy paste a build export here..."
-            ></textarea>
-          )}
-          {!lockedBuild && (
+            {showImportRouteTextarea && (
+              <textarea
+                id="build-export-text-area"
+                style={{ width: "100%" }}
+                rows={10}
+                onChange={(e) => {
+                  setBuildExportStr(e.target.value);
+                }}
+                placeholder="Copy paste a build export here..."
+              ></textarea>
+            )}
+            {!lockedBuild && (
+              <button
+                onClick={() => {
+                  setShowImportRouteTextarea(!showImportRouteTextarea);
+                }}
+              >
+                Import Route
+              </button>
+            )}
             <button
               onClick={() => {
-                setShowImportRouteTextarea(!showImportRouteTextarea);
+                if (
+                  navigator &&
+                  navigator.clipboard &&
+                  navigator.clipboard.writeText
+                ) {
+                  navigator.clipboard.writeText(JSON.stringify(build));
+                  alert("Copied build export to clipboard");
+                } else {
+                  alert("FAILED to copy build export to clipboard");
+                }
               }}
             >
-              Import Route
+              Export Route to clipboard
             </button>
-          )}
-          <button
-            onClick={() => {
-              if (
-                navigator &&
-                navigator.clipboard &&
-                navigator.clipboard.writeText
-              ) {
-                navigator.clipboard.writeText(JSON.stringify(build));
-                alert("Copied build export to clipboard");
-              } else {
-                alert("FAILED to copy build export to clipboard");
-              }
-            }}
-          >
-            Export Route to clipboard
-          </button>
-          {!lockedBuild && (
-            <button
-              onClick={() => {
-                setBuildExportStr(JSON.stringify(sampleBuildMikeychainV2));
-              }}
-            >
-              Import Mikeychain's Lazy 2.0 Route for Challenge Mode
-            </button>
-          )}
+            {!lockedBuild && (
+              <button
+                onClick={() => {
+                  setBuildExportStr(JSON.stringify(sampleBuildMikeychainV2));
+                }}
+              >
+                Import Mikeychain's Lazy 2.0 Route for Challenge Mode
+              </button>
+            )}
+            <p style={{ marginBottom: "20vh" }}></p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
